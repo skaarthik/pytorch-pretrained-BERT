@@ -108,7 +108,7 @@ class BertMultiTask:
             self.bert_encoder = BertModel(bert_config)
         # Use pretrained bert weights
         else:
-            self.bert_encoder = BertModel.from_pretrained(self.config['bert_model_file'], cache_dir=PYTORCH_PRETRAINED_BERT_CACHE / 'distributed_{}'.format(args.local_rank))
+            self.bert_encoder = BertModel.from_pretrained(self.config['bert_model_file'], cache_dir=args.files_location)
             bert_config = self.bert_encoder.config
         self.network=MTLRouting(self.bert_encoder, args)
 

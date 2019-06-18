@@ -42,10 +42,22 @@ class ThroughputTimer(object):
         return -999
 
 
+    # def print_elapsed_time(self, num_ops=None):
+    #     if self.count > 2 and self.count % 1000  == 0:
+    #         elapsed_time = self.total_elapsed_time / (self.count-2.0)
+    #         if num_ops == None:
+    #             print(self.name, " forward pass execution time: ", elapsed_time)
+    #         else:
+    #             print(self.name, " forward pass execution time: ", elapsed_time, " TFlops : ", num_ops/(elapsed_time * 1000000000000))
+
     def print_elapsed_time(self, num_ops=None):
-        if self.count > 2 and self.count % 1000  == 0:
+        if self.count > 2 and self.count % 1000 == 0:
             elapsed_time = self.total_elapsed_time / (self.count-2.0)
             if num_ops == None:
-                print(self.name, " forward pass execution time: ", elapsed_time)
+                # print(self.name, " forward pass execution time: ", elapsed_time)
+                print("{} forward pass execution time: {} -- count: {}".format(self.name, elapsed_time, self.count))
             else:
-                print(self.name, " forward pass execution time: ", elapsed_time, " TFlops : ", num_ops/(elapsed_time * 1000000000000))
+                # print(self.name, " forward pass execution time: ",
+                #       elapsed_time, " TFlops : ", num_ops/(elapsed_time * 1000000000000))
+                print("{} forward pass execution time: {} -- TFlops : {} -- count: {}"
+                      .format(self.name, elapsed_time, num_ops/(elapsed_time * 1000000000000), self.count))

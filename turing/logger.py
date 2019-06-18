@@ -1,5 +1,5 @@
 import logging
-import torch.distributed as dist
+import os
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -14,7 +14,8 @@ class Logger():
         self.cuda = cuda
 
     def info(self, message, *args, **kwargs):
-        if (self.cuda and dist.get_rank() == 0) or not self.cuda:
+        local_rank = int(os.environ['OMPI_COMM_WORLD_LOCAL_RANK'])
+        if (self.cuda and local_rank == 0) or not self.cuda:
             self.logger.info(message, *args, **kwargs)
 
     def error(self, message, *args, **kwargs):

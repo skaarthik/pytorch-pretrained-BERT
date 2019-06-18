@@ -87,6 +87,7 @@ class PretrainingDataCreator:
 
     @staticmethod
     def load(filename):
+        print("Loading filename {}".format(filename))
         with open(filename, 'rb') as f:
             return pickle.load(f)
 
